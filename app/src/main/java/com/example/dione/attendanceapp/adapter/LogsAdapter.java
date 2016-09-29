@@ -28,10 +28,12 @@ public class LogsAdapter extends ArrayAdapter {
     }
     static class ViewHolder{
         private TextView textViewDate;
-        private TextView textViewTime;
+        private TextView textViewTimeIn;
+        private TextView textViewTimeOut;
         public ViewHolder(View view){
             textViewDate = (TextView) view.findViewById(R.id.textViewDate);
-            textViewTime = (TextView) view.findViewById(R.id.textViewTime);
+            textViewTimeIn = (TextView) view.findViewById(R.id.textViewTimeIn);
+            textViewTimeOut = (TextView) view.findViewById(R.id.textViewTimeOut);
         }
     }
 
@@ -47,7 +49,8 @@ public class LogsAdapter extends ArrayAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         viewHolder.textViewDate.setText(logsModelArrayList.get(position).getDateLogged());
-        viewHolder.textViewTime.setText(logsModelArrayList.get(position).getTimeLogged());
+        viewHolder.textViewTimeIn.setText(logsModelArrayList.get(position).getTimeInLog());
+        viewHolder.textViewTimeOut.setText(logsModelArrayList.get(position).getTimeOutLog());
         return convertView;
     }
 }

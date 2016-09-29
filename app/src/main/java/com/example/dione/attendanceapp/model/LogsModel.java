@@ -6,17 +6,23 @@ package com.example.dione.attendanceapp.model;
 
 public class LogsModel {
     private String dateLogged;
-    private String timeLogged;
-    public LogsModel(String dateLogged, String timeLogged){
+    private String timeInLog = "";
+    private String timeOutLog = "";
+    public LogsModel(String dateLogged, String timeInLog, String timeOutLog){
         this.dateLogged = dateLogged;
-        this.timeLogged = timeLogged;
+        this.timeInLog = timeInLog;
+        this.timeOutLog = timeOutLog;
     }
 
     public String getDateLogged() {
         return dateLogged;
     }
 
-    public String getTimeLogged() {
-        return timeLogged;
+    public String getTimeInLog() {
+        return timeInLog;
+    }
+
+    public String getTimeOutLog() {
+        return timeOutLog;
     }
 }
