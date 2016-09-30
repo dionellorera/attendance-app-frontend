@@ -2,8 +2,12 @@ package com.example.dione.attendanceapp.api;
 
 import com.example.dione.attendanceapp.api.interfaces.ILogin;
 import com.example.dione.attendanceapp.api.interfaces.ILogs;
+import com.example.dione.attendanceapp.api.interfaces.ITimeIn;
+import com.example.dione.attendanceapp.api.interfaces.ITimeOut;
 import com.example.dione.attendanceapp.api.response_models.Login.Login;
 import com.example.dione.attendanceapp.api.response_models.Logs.Logs;
+import com.example.dione.attendanceapp.api.response_models.TimeIn.TimeIn;
+import com.example.dione.attendanceapp.api.response_models.TimeOut.TimeOut;
 import com.squareup.okhttp.OkHttpClient;
 
 import retrofit.Callback;
@@ -43,5 +47,14 @@ public class AttendanceClient {
         iLogs.getLogin(id, username, code, callback);
     }
 
+    public void getTimeInResponse(String token, String timeIn, String date, Callback<TimeIn> callback) {
+        ITimeIn iTimeIn = mRestAdapter.create(ITimeIn.class);
+        iTimeIn.getTimeIn(token, timeIn, date, callback);
+    }
+
+    public void getTimeOutResponse(String token, String timeOut, String date, Callback<TimeOut> callback) {
+        ITimeOut iTimeOut = mRestAdapter.create(ITimeOut.class);
+        iTimeOut.getTimeOut(token, timeOut, date, callback);
+    }
 
 }

@@ -15,7 +15,7 @@ public class Result {
     private String timeIn;
     @SerializedName("time_out")
     @Expose
-    private String timeOut;
+    private String timeOut = "00:00:00";
     @SerializedName("date")
     @Expose
     private String date;

@@ -5,10 +5,16 @@ import android.content.Context;
 import com.example.dione.attendanceapp.api.AttendanceClient;
 import com.example.dione.attendanceapp.api.response_models.Login.Login;
 import com.example.dione.attendanceapp.api.response_models.Logs.Logs;
+import com.example.dione.attendanceapp.api.response_models.TimeIn.TimeIn;
+import com.example.dione.attendanceapp.api.response_models.TimeOut.TimeOut;
 import com.example.dione.attendanceapp.event.GetLoginResponseEvent;
 import com.example.dione.attendanceapp.event.GetLogsListResponseEvent;
+import com.example.dione.attendanceapp.event.GetTimeinResponseEvent;
+import com.example.dione.attendanceapp.event.GetTimeoutResponseEvent;
 import com.example.dione.attendanceapp.event.SendLoginRequestEvent;
 import com.example.dione.attendanceapp.event.SendLogsListRequestEvent;
+import com.example.dione.attendanceapp.event.SendTimeinRequestEvent;
+import com.example.dione.attendanceapp.event.SendTimeoutRequestEvent;
 import com.example.dione.attendanceapp.event.SendWeatherEventError;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
@@ -59,5 +65,37 @@ public class AttendanceManager {
             }
         };
         sAttendanceClient.getLoginResponse(getLoginResponseEvent.getId(), getLoginResponseEvent.getUsername(), getLoginResponseEvent.getCode(), callback);
+    }
+
+    @Subscribe
+    public void onGetLoginResponse(GetTimeinResponseEvent getTimeinResponseEvent) {
+        Callback<TimeIn> callback = new Callback<TimeIn>() {
+            @Override
+            public void success(TimeIn timeIn, retrofit.client.Response response) {
+                mBus.post(new SendTimeinRequestEvent(timeIn));
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                mBus.post(new SendWeatherEventError(error));
+            }
+        };
+        sAttendanceClient.getTimeInResponse(getTimeinResponseEvent.getToken(), getTimeinResponseEvent.getTimeIn(), getTimeinResponseEvent.getDate(), callback);
+    }
+
+    @Subscribe
+    public void onGetTimeoutResponseEvent(GetTimeoutResponseEvent getTimeoutResponseEvent) {
+        Callback<TimeOut> callback = new Callback<TimeOut>() {
+            @Override
+            public void success(TimeOut timeOut, retrofit.client.Response response) {
+                mBus.post(new SendTimeoutRequestEvent(timeOut));
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                mBus.post(new SendWeatherEventError(error));
+            }
+        };
+        sAttendanceClient.getTimeOutResponse(getTimeoutResponseEvent.getToken(), getTimeoutResponseEvent.getTimeIn(), getTimeoutResponseEvent.getDate(), callback);
     }
 }

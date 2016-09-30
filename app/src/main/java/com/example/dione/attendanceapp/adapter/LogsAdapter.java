@@ -48,7 +48,7 @@ public class LogsAdapter extends ArrayAdapter {
         }else{
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.textViewDate.setText(logsModelArrayList.get(position).getDateLogged());
+        viewHolder.textViewDate.setText(logsModelArrayList.get(position).getDateLogged().split("T")[0]);
         viewHolder.textViewTimeIn.setText(logsModelArrayList.get(position).getTimeInLog());
         viewHolder.textViewTimeOut.setText(logsModelArrayList.get(position).getTimeOutLog());
         return convertView;

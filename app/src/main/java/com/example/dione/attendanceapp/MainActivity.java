@@ -17,7 +17,10 @@ import com.example.dione.attendanceapp.event.SendLoginRequestEvent;
 import com.example.dione.attendanceapp.event.SendLogsListRequestEvent;
 import com.example.dione.attendanceapp.event.SendWeatherEventError;
 import com.example.dione.attendanceapp.helpers.Helpers;
+import com.orm.SugarContext;
 import com.squareup.otto.Subscribe;
+
+import net.danlew.android.joda.JodaTimeAndroid;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private ProgressDialog progressDialog;

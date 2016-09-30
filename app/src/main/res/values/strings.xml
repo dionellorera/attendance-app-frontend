@@ -3,4 +3,5 @@
     <string name="app_title">Attendance</string>
     <string name="error_required_field">Required Field</string>
     <string name="message_loading">Loading</string>
+    <string name="text_logout">Logout</string>
 </resources>

@@ -29,7 +29,8 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Id"/>
+                android:hint="Id"
+                android:text="2"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -40,7 +41,8 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Username"/>
+                android:hint="Username"
+                android:text="lloreradonds"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -52,7 +54,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Code"
-                android:inputType="numberPassword"/>
+                android:inputType="numberPassword"
+                android:text="666666"/>
         </android.support.design.widget.TextInputLayout>
 
         <Button
