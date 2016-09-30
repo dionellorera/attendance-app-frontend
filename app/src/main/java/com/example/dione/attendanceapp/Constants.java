@@ -6,4 +6,5 @@ package com.example.dione.attendanceapp;
 
 public class Constants {
     public static String TOKEN = "token";
+    public static String LOGIN_PREFERENCE = "login_preference";
 }

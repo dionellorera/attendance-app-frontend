@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
         initialize();
+        redirectIfLoggedIn();
     }
 
     private void initialize(){
@@ -50,6 +51,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editTextCode = (EditText) findViewById(R.id.editTextCode);
     }
 
+    private void saveLoginPreference(String value){
+        Helpers.saveStringSharedPreference(this, Constants.LOGIN_PREFERENCE, value);
+    }
+
+    private void redirectIfLoggedIn(){
+        if(!Helpers.getStringPreference(this, Constants.LOGIN_PREFERENCE).equals("")){
+            Intent intent = new Intent(this, LogsActivity.class);
+            intent.putExtra(Constants.TOKEN, Helpers.getStringPreference(this, Constants.LOGIN_PREFERENCE));
+            startActivity(intent);
+            finish();
+        }
+    }
+
     private void sendLoginRequest(){
         progressDialog.show();
         attendanceApplication.mBus.post(new GetLoginResponseEvent(editTextId.getText().toString(), editTextUsername.getText().toString(), editTextCode.getText().toString()));
@@ -58,9 +72,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Subscribe
     public void onSendLoginEvent(SendLoginRequestEvent sendLoginRequestEvent) {
         if (sendLoginRequestEvent.getmLogin().getMessage().equals("success")){
+            saveLoginPreference(sendLoginRequestEvent.getmLogin().getToken());
             Intent intent = new Intent(this, LogsActivity.class);
             intent.putExtra(Constants.TOKEN, sendLoginRequestEvent.getmLogin().getToken());
             startActivity(intent);
+            finish();
         }else{
             Toast.makeText(this, "Failed to Login", Toast.LENGTH_SHORT).show();
         }

@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -213,8 +216,25 @@ public class LogsActivity extends AppCompatActivity implements View.OnClickListe
                 }else{
                     Toast.makeText(this, "Come back tomorrow :D", Toast.LENGTH_SHORT).show();
                 }
-
                 break;
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.logout_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_logout:
+                Helpers.clearPreferences(this);
+                finish();
+                startActivity(new Intent(this, MainActivity.class));
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
