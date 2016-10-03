@@ -11,7 +11,6 @@ public class SendLoginRequestEvent {
     public SendLoginRequestEvent(Login login) {
         this.mLogin = login;
     }
-
     public Login getmLogin() {
         return mLogin;
     }

@@ -58,10 +58,12 @@ public class AttendanceManager {
             public void success(Login login, retrofit.client.Response response) {
                 mBus.post(new SendLoginRequestEvent(login));
             }
-
             @Override
             public void failure(RetrofitError error) {
-                mBus.post(new SendWeatherEventError(error));
+                Login login = new Login();
+                SendLoginRequestEvent sendLoginRequestEvent = new SendLoginRequestEvent(login);
+                sendLoginRequestEvent.getmLogin().setMessage("Failed to Login");
+                mBus.post(sendLoginRequestEvent);
             }
         };
         sAttendanceClient.getLoginResponse(getLoginResponseEvent.getId(), getLoginResponseEvent.getUsername(), getLoginResponseEvent.getCode(), callback);
